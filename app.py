@@ -58,7 +58,7 @@ def create_app(test_config=None):
             actor.delete()
             return jsonify({
                 "success": True,
-                "actor": id
+                "deleted actor id": id
             }), 200
         except Exceptions as e:
             print(f"error: {e}")
@@ -71,7 +71,7 @@ def create_app(test_config=None):
             movie.delete()
             return jsonify({
                 "success": True,
-                "movie": id
+                "deleted movie id": id
             }), 200
         except Exceptions as e:
             print(f"error: {e}")
@@ -81,8 +81,7 @@ def create_app(test_config=None):
     def add_actors():
         try:
             body = request.get_json()
-            actor = Actor(name=body.get('name'), dob=body.get(
-                'DOB'), gender=body.get('gender'))
+            actor = Actor(name=body['name'], dob=body['DOB'], gender=body.get('gender'))
             actor.insert()
             return jsonify({
                 'success': True,

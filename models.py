@@ -4,7 +4,8 @@ import json
 import os
 
 database_path = os.environ['DATABASE_URL']
-
+#comment the upper line and decomment below if you have troubles while testing
+# database_path="postgres://postgres:postgres@localhost:5432/capstone"
 db = SQLAlchemy()
 
 
@@ -21,6 +22,7 @@ class Movie(db.Model):
     id = Column(db.Integer, primary_key=True)
     title = Column(db.String, nullable=False)
     release_date = Column(db.DateTime)
+    actors = db.relationship("Actor", secondary='actor_movie', back_populates='movies' )
 
     def __init__(self, title, release_date):
         self.title = title
@@ -55,6 +57,7 @@ class Actor(db.Model):
     # date of birth
     dob = Column(db.DateTime, nullable=False)
     gender = Column(db.String)
+    movies = db.relationship("Movie", secondary="actor_movie", back_populates="actors")
 
     def __init__(self, name, dob, gender):
         self.name = name

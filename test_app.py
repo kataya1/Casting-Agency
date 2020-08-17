@@ -1,20 +1,22 @@
 import unittest
 import json
+import os
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
 from models import setup_db, Actor, Movie
 
+
 class CapstoneTestCase(unittest.TestCase):
     """This class represents the trivia test case"""
-
+    actorIDforTesting, movieIDforTesting = 11, 11
     def setUp(self):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_name = "capstone"
-        self.database_path = "postgres://postgres:postgres@{}/{}".format('localhost:5432', self.database_name)
-        setup_db(self.app, self.database_path)
+        # self.database_name = "capstone"
+        # self.database_path = "postgres://postgres:postgres@{}/{}".format('localhost:5432', self.database_name)
+        setup_db(self.app)
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
@@ -51,7 +53,6 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
         self.assertTrue(data['actor'])
-        self.actorIDforTesting = data['actor']['id']
 
     def test_add_movie(self):
         res = self.client().post('/movies', json={"title": "the test",   "release_date": "1990-4-12"})
@@ -59,13 +60,15 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
         self.assertTrue(data['movie'])
-        self.movieIDforTesting = data['movie']['id']
 
     def test_patch_actor(self):
         # check if thit works
-        actor = Actor.query.get(self.actorIDforTesting)
-        old_name = actor.name
-        res - self.client().patch(f'actors/{self.actorIDforTesting}', json={"name": "timmy turner"})
+        res = self.client().post('/actors', json={"name": "testy mctest",   "DOB": "1965-3-16", "gender": "female"})
+        data = json.loads(res.data)
+        actorIDforTesting = data['actor']['id']
+        # actor = Actor.query.get(self.actorIDforTesting)
+        old_name = data['actor']['name']
+        res = self.client().patch(f'actors/{actorIDforTesting}', json={"name": "timmy turner"})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['actor'])
@@ -73,49 +76,54 @@ class CapstoneTestCase(unittest.TestCase):
 
     def test_patch_movie(self):
         # check if this works
-        movie = Movie.query.get(self.movieIDforTesting)
-        old_title = movie.name
-        res - self.client().patch(f'movies/{self.movieIDforTesting}', json={"title": "spirited away"})
+        res = self.client().post('/movies', json={"title": "the test",   "release_date": "1990-4-12"})
+        data = json.loads(res.data)
+        movieIDforTesting = data['movie']['id']
+        old_title = data['movie']['title']
+
+        res = self.client().patch(f'movies/{movieIDforTesting}', json={"title": "spirited away"})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['movie'])
         self.assertNotEqual(data['movie']['title'], old_title)
 
     def test_delete_actor(self):
-        res = self.client().delete(f'/actors/{self.actorIDforTesting}')
+        res = self.client().post('/actors', json={"name": "testy mctest",   "DOB": "1965-3-16", "gender": "female"})
+        data = json.loads(res.data)
+        actorIDforTesting = data['actor']['id']
+        res = self.client().delete(f'/actors/{actorIDforTesting}')
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
-        self.assertEqual(data['success'], True)
-        self.assertEqual(data['actor'], self.actorIDforTesting)
+        self.assertEqual(data['deleted actor id'], actorIDforTesting)
 
     def test_delete_movie(self):
-        res = self.client().delete(f'/movies/{self.movieIDforTesting}')
+        res = self.client().post('/movies', json={"title": "the test",   "release_date": "1990-4-12"})
+        data = json.loads(res.data)
+        movieIDforTesting = data['movie']['id']
+
+        res = self.client().delete(f'/movies/{movieIDforTesting}')
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
-        self.assertEqual(data['success'], True)
-        self.assertEqual(data['movie'], self.movieIDforTesting)
+        self.assertEqual(data['deleted movie id'], movieIDforTesting)
 
     def test_get_actors_beyond_pagination_limit(self):
         res = self.client().get('/actors?page=999')
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
-        self.assertTrue(data['success'])
         self.assertEqual(data['success'], False)
 
     def test_get_movie_beyond_pagination_limit(self):
         res = self.client().get('/movies?page=999')
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
-        self.assertTrue(data['success'])
         self.assertEqual(data['success'], False)
 
     def test_add_actor_fail(self):
         res = self.client().post('/actors', json={"DOB": "1965-3-16", "gender": "female"})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 422)
-        self.assertTrue(data['success'])
         self.assertEqual(data['success'], False)
         self.assertTrue(data['error'])
 
@@ -123,7 +131,6 @@ class CapstoneTestCase(unittest.TestCase):
         res = self.client().post('/movies', json={})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 422)
-        self.assertTrue(data['success'])
         self.assertEqual(data['success'], False)
         self.assertTrue(data['error'])
 
