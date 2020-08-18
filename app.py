@@ -1,9 +1,9 @@
 import os
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, abort, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db, Actor, Movie
-# from auth import AuthError
+from auth import AuthError, requires_auth
 
 # pagination
 items_PER_PAGE = 5
@@ -27,8 +27,10 @@ def create_app(test_config=None):
 
     CORS(app)
 
-    # wrong ones
-
+    @app.route("/")
+    def index():
+        return render_template("index.html")
+    # @requires_auth(permission='get:actors')
     @app.route('/actors')
     def get_actors():
         actors = Actor.query.order_by(Actor.id).all()
@@ -39,7 +41,7 @@ def create_app(test_config=None):
             "success": True,
             "actors": current_selection
         }), 200
-
+    # @requires_auth(permission='get:movies')
     @app.route('/movies')
     def get_movies():
         movies = Movie.query.order_by(Movie.id).all()
@@ -51,6 +53,7 @@ def create_app(test_config=None):
             "movies": current_selection
         }), 200
 
+    # @requires_auth(permission="delete:actors")
     @app.route('/actors/<int:id>', methods=['DELETE'])
     def delete_actor(id):
         actor = Actor.query.get_or_404(id)
@@ -64,6 +67,7 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
+    # @requires_auth(permission="delete:movies")
     @app.route('/movies/<int:id>', methods=['DELETE'])
     def delete_movie(id):
         movie = Movie.query.get_or_404(id)
@@ -77,6 +81,7 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
+    # @requires_auth(permission="post:actors")
     @app.route('/actors', methods=['POST'])
     def add_actors():
         try:
@@ -91,6 +96,7 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
+    # @requires_auth(permission="post:movies")
     @app.route('/movies', methods=['POST'])
     def add_movies():
         try:
@@ -106,6 +112,7 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
+    # @requires_auth(permission="patch:actors")
     @app.route('/actors/<int:id>', methods=['PATCH'])
     def update_actors(id):
         actor = Actor.query.get_or_404(id)
@@ -127,6 +134,7 @@ def create_app(test_config=None):
             print(f'error: {e}')
             abort(422)
 
+    # @requires_auth(permission="patch:movies")
     @app.route('/movies/<int:id>', methods=['PATCH'])
     def update_movies(id):
         movie = Movie.query.get_or_404(id)
@@ -181,16 +189,17 @@ def create_app(test_config=None):
             "error": 500,
             "message": "internal server error"
         }), 500
+
     # source https://knowledge.udacity.com/questions/97965
-    # @app.errorhandler(AuthError)
-    # def autherror(error):
-    #     error_details = error.error
-    #     error_status_code = error.status_code
-    #     return jsonify({
-    #         'success': False,
-    #         'error': error_status_code,
-    #         'message': f"{error_details['code']}: {error_details['description']}"
-    #     }), error_status_code
+    @app.errorhandler(AuthError)
+    def autherror(error):
+        error_details = error.error
+        error_status_code = error.status_code
+        return jsonify({
+            'success': False,
+            'error': error_status_code,
+            'message': f"{error_details['code']}: {error_details['description']}"
+        }), error_status_code
 
     return app
 
