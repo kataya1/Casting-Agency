@@ -5,7 +5,7 @@ import os
 
 database_path = os.environ['DATABASE_URL']
 #comment the upper line and decomment below if you have troubles while testing
-database_path="postgres://postgres:postgres@localhost:5432/capstone"
+# database_path="postgres://postgres:postgres@localhost:5432/capstone"
 db = SQLAlchemy()
 
 
