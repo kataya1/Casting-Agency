@@ -3,7 +3,7 @@ from flask import Flask, request, abort, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db, Actor, Movie
-from auth import AuthError, requires_auth
+# from auth import AuthError, requires_auth
 
 # pagination
 items_PER_PAGE = 5
@@ -191,15 +191,15 @@ def create_app(test_config=None):
         }), 500
 
     # source https://knowledge.udacity.com/questions/97965
-    @app.errorhandler(AuthError)
-    def autherror(error):
-        error_details = error.error
-        error_status_code = error.status_code
-        return jsonify({
-            'success': False,
-            'error': error_status_code,
-            'message': f"{error_details['code']}: {error_details['description']}"
-        }), error_status_code
+    # @app.errorhandler(AuthError)
+    # def autherror(error):
+    #     error_details = error.error
+    #     error_status_code = error.status_code
+    #     return jsonify({
+    #         'success': False,
+    #         'error': error_status_code,
+    #         'message': f"{error_details['code']}: {error_details['description']}"
+    #     }), error_status_code
 
     return app
 
