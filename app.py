@@ -1,12 +1,14 @@
 import os
-from flask import Flask, request, abort, jsonify, render_template
+from flask import Flask, request, abort, jsonify, render_template, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db, Actor, Movie
-# from auth import AuthError, requires_auth
+# from auth import AuthError, requires_auth, AUTH0_AUTHORIZE_URL
 
 # pagination
 items_PER_PAGE = 5
+AUTH0_AUTHORIZE_URL = "https://noisy-pond-1849.us.auth0.com/authorize?audience=casting-agency&response_type=token&client_id=7NCGYZ6utWFtYbuGU2bQ3U2H8fbs3Nrb&redirect_uri=https://casting-agency1996.herokuapp.com/callback"
+
 
 def paginate_items(request, selection):
     # i copied this function from the lesson
@@ -21,7 +23,7 @@ def paginate_items(request, selection):
 
 def create_app(test_config=None):
     # create and configure the app
-    
+
     app = Flask(__name__)
     setup_db(app)
 
@@ -29,9 +31,22 @@ def create_app(test_config=None):
 
     @app.route("/")
     def index():
+        return render_template("signin.html", AUTH0_AUTHORIZE_URL=AUTH0_AUTHORIZE_URL)
+
+    @app.route("/callback")
+    def callback_redirector():
         return render_template("index.html")
-    # @requires_auth(permission='get:actors')
+
+    @app.route("/logout")
+    def logout():
+        session.clear()
+        return render_template("logout.html")
+
+# ---------------------------------------
+#                API
+# ---------------------------------------
     @app.route('/actors')
+    # @requires_auth(permission='get:actors')
     def get_actors():
         actors = Actor.query.order_by(Actor.id).all()
         current_selection = paginate_items(request, actors)
@@ -39,10 +54,12 @@ def create_app(test_config=None):
             abort(404)
         return jsonify({
             "success": True,
-            "actors": current_selection
+            "actors": current_selection,
+            "total number of actors": len(actors)
         }), 200
-    # @requires_auth(permission='get:movies')
+
     @app.route('/movies')
+    # @requires_auth(permission='get:movies')
     def get_movies():
         movies = Movie.query.order_by(Movie.id).all()
         current_selection = paginate_items(request, movies)
@@ -50,11 +67,12 @@ def create_app(test_config=None):
             abort(404)
         return jsonify({
             "success": True,
-            "movies": current_selection
+            "movies": current_selection,
+            "total number of movies": len(movies)
         }), 200
 
-    # @requires_auth(permission="delete:actors")
     @app.route('/actors/<int:id>', methods=['DELETE'])
+    # @requires_auth(permission="delete:actors")
     def delete_actor(id):
         actor = Actor.query.get_or_404(id)
         try:
@@ -67,8 +85,8 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
-    # @requires_auth(permission="delete:movies")
     @app.route('/movies/<int:id>', methods=['DELETE'])
+    # @requires_auth(permission="delete:movies")
     def delete_movie(id):
         movie = Movie.query.get_or_404(id)
         try:
@@ -81,12 +99,13 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
-    # @requires_auth(permission="post:actors")
     @app.route('/actors', methods=['POST'])
+    # @requires_auth(permission="post:actors")
     def add_actors():
         try:
             body = request.get_json()
-            actor = Actor(name=body['name'], dob=body['DOB'], gender=body.get('gender'))
+            actor = Actor(name=body['name'],
+                          dob=body['DOB'], gender=body.get('gender'))
             actor.insert()
             return jsonify({
                 'success': True,
@@ -96,8 +115,8 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
-    # @requires_auth(permission="post:movies")
     @app.route('/movies', methods=['POST'])
+    # @requires_auth(permission="post:movies")
     def add_movies():
         try:
             body = request.get_json()
@@ -112,8 +131,8 @@ def create_app(test_config=None):
             print(f"error: {e}")
             abort(422)
 
-    # @requires_auth(permission="patch:actors")
     @app.route('/actors/<int:id>', methods=['PATCH'])
+    # @requires_auth(permission="patch:actors")
     def update_actors(id):
         actor = Actor.query.get_or_404(id)
         try:
@@ -134,8 +153,8 @@ def create_app(test_config=None):
             print(f'error: {e}')
             abort(422)
 
-    # @requires_auth(permission="patch:movies")
     @app.route('/movies/<int:id>', methods=['PATCH'])
+    # @requires_auth(permission="patch:movies")
     def update_movies(id):
         movie = Movie.query.get_or_404(id)
         try:
@@ -145,7 +164,8 @@ def create_app(test_config=None):
             # but if it has attribute -as a proberty of python or- it chooses the
             #  first one if both are true
             movie.title = body.get('title', None) or movie.title
-            movie.release_date = body.get('release_date', None) or movie.release_date
+            movie.release_date = body.get(
+                'release_date', None) or movie.release_date
             movie.update()
             return jsonify({
                 'success': True,
@@ -181,7 +201,7 @@ def create_app(test_config=None):
             "error": 400,
             "message": "bad request"
         }), 400
-    
+
     @app.errorhandler(500)
     def bad_request(error):
         return jsonify({
