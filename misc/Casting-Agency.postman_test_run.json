@@ -1,0 +1,860 @@
+{
+	"id": "153ebb32-bda4-4a44-b684-ee8616346d56",
+	"name": "Casting-Agency",
+	"timestamp": "2020-08-21T20:28:08.401Z",
+	"collection_id": "44476ea9-bf7c-4bf7-b79e-841ee0bf22ca",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 32,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "12683cf5-aeb5-4d6b-bdae-f0bd05304072",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 806,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				806
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "a6d7d979-bf56-44f2-8990-3746d43ca973",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 427,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				427
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "ecd14801-10e4-434f-a6af-d1314b956e45",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 295,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains actors array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains actors array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				295
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains actors array": true
+				}
+			]
+		},
+		{
+			"id": "4aaa3473-6ae2-46a5-be7f-6192b4167d34",
+			"name": "/movies",
+			"url": "https://casting-agency1996.herokuapp.com/movies",
+			"time": 248,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains movies array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains movies array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				248
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains movies array": true
+				}
+			]
+		},
+		{
+			"id": "3777701d-ac20-4c18-9d6b-93029f351859",
+			"name": "/movies",
+			"url": "https://casting-agency1996.herokuapp.com/movies",
+			"time": 220,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				220
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "de3fcf79-73af-43d0-9cfa-918f1023ff7e",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 302,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				302
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "031537fd-537c-4763-9b0e-3166ae7beb60",
+			"name": "/actors/1",
+			"url": "https://casting-agency1996.herokuapp.com/actors/1",
+			"time": 231,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				231
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "96cceede-1609-4aa9-8bfc-b21eaa57584f",
+			"name": "/movies/1",
+			"url": "https://casting-agency1996.herokuapp.com/actors/1",
+			"time": 230,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				230
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "dd641070-e600-4d4c-82d7-fb72cb8630c6",
+			"name": "/actors/2",
+			"url": "https://casting-agency1996.herokuapp.com/actors/2",
+			"time": 204,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				204
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "56ba039a-5e81-4c69-bb46-788878d4e851",
+			"name": "/movies/2",
+			"url": "https://casting-agency1996.herokuapp.com/movies/2",
+			"time": 216,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				216
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "0374b8d9-1ff1-4bb1-b3df-82e065dd8da8",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 237,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains actors array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains actors array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				237
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains actors array": true
+				}
+			]
+		},
+		{
+			"id": "da403883-6ea3-4740-9c69-e6467e0e69be",
+			"name": "/movies",
+			"url": "https://casting-agency1996.herokuapp.com/movies",
+			"time": 207,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains movies array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains movies array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				207
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains movies array": true
+				}
+			]
+		},
+		{
+			"id": "0ffdfa9b-e8e1-4fbb-a668-6b5cf2259b12",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 322,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				322
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "b678cea8-4654-42f3-9e62-e30f8ebf8349",
+			"name": "/movies",
+			"url": "https://casting-agency1996.herokuapp.com/movies",
+			"time": 216,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				216
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "c1c80557-9e25-4123-84d9-ffb6652fcc03",
+			"name": "/actors/{{actor_id}}",
+			"url": "https://casting-agency1996.herokuapp.com/actors/18",
+			"time": 232,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				232
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "d246f48d-3651-4bac-a018-e355d88b6910",
+			"name": "/movies/1",
+			"url": "https://casting-agency1996.herokuapp.com/actors/1",
+			"time": 227,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				227
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "ed3f6842-63d3-46a2-8608-ca432d4a2ac0",
+			"name": "/actors/{{actor_id}}",
+			"url": "https://casting-agency1996.herokuapp.com/actors/18",
+			"time": 224,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				224
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "4dbfce36-79e8-4e71-bceb-c49ff444a78f",
+			"name": "/movies/2",
+			"url": "https://casting-agency1996.herokuapp.com/movies/2",
+			"time": 207,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"Status code is 403": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				207
+			],
+			"allTests": [
+				{
+					"Status code is 403": true
+				}
+			]
+		},
+		{
+			"id": "37640271-bbcb-4b1a-a2e9-3a57f42eff54",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 217,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains actors array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains actors array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				217
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains actors array": true
+				}
+			]
+		},
+		{
+			"id": "3111a86e-d647-4df9-bf23-6d54ace4dd83",
+			"name": "/movies",
+			"url": "https://casting-agency1996.herokuapp.com/movies",
+			"time": 221,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains movies array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains movies array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				221
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains movies array": true
+				}
+			]
+		},
+		{
+			"id": "07aae053-f65a-4c4f-996f-d6ade26044ad",
+			"name": "/actors",
+			"url": "https://casting-agency1996.herokuapp.com/actors",
+			"time": 223,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				223
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "48dffc26-7727-45d4-8a33-8b99bd2f918a",
+			"name": "/movies",
+			"url": "https://casting-agency1996.herokuapp.com/movies",
+			"time": 249,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				249
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "cbdd7d6a-5b74-4a70-b8a1-05f2ee3951a9",
+			"name": "/actors/{{actor_id}}",
+			"url": "https://casting-agency1996.herokuapp.com/actors/19",
+			"time": 236,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				236
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "0a402f9a-3bf6-4371-8673-e2992497895c",
+			"name": "/movies/{{movie_id}}",
+			"url": "https://casting-agency1996.herokuapp.com/actors/1",
+			"time": 219,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				219
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "0827d8e9-6548-4668-aefc-f20ffbcc7e3a",
+			"name": "/actors/{{actor_id}}",
+			"url": "https://casting-agency1996.herokuapp.com/actors/19",
+			"time": 257,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				257
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "a73fc328-638b-4a52-ad54-a0a81a5b938b",
+			"name": "/movies/{{movie_id}}",
+			"url": "https://casting-agency1996.herokuapp.com/movies/17",
+			"time": 256,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				256
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 6929,
+	"collection": {
+		"requests": [
+			{
+				"id": "12683cf5-aeb5-4d6b-bdae-f0bd05304072",
+				"method": "GET"
+			},
+			{
+				"id": "a6d7d979-bf56-44f2-8990-3746d43ca973",
+				"method": "GET"
+			},
+			{
+				"id": "ecd14801-10e4-434f-a6af-d1314b956e45",
+				"method": "GET"
+			},
+			{
+				"id": "4aaa3473-6ae2-46a5-be7f-6192b4167d34",
+				"method": "GET"
+			},
+			{
+				"id": "3777701d-ac20-4c18-9d6b-93029f351859",
+				"method": "POST"
+			},
+			{
+				"id": "de3fcf79-73af-43d0-9cfa-918f1023ff7e",
+				"method": "POST"
+			},
+			{
+				"id": "031537fd-537c-4763-9b0e-3166ae7beb60",
+				"method": "PATCH"
+			},
+			{
+				"id": "96cceede-1609-4aa9-8bfc-b21eaa57584f",
+				"method": "PATCH"
+			},
+			{
+				"id": "dd641070-e600-4d4c-82d7-fb72cb8630c6",
+				"method": "DELETE"
+			},
+			{
+				"id": "56ba039a-5e81-4c69-bb46-788878d4e851",
+				"method": "DELETE"
+			},
+			{
+				"id": "0374b8d9-1ff1-4bb1-b3df-82e065dd8da8",
+				"method": "GET"
+			},
+			{
+				"id": "da403883-6ea3-4740-9c69-e6467e0e69be",
+				"method": "GET"
+			},
+			{
+				"id": "0ffdfa9b-e8e1-4fbb-a668-6b5cf2259b12",
+				"method": "POST"
+			},
+			{
+				"id": "b678cea8-4654-42f3-9e62-e30f8ebf8349",
+				"method": "POST"
+			},
+			{
+				"id": "c1c80557-9e25-4123-84d9-ffb6652fcc03",
+				"method": "PATCH"
+			},
+			{
+				"id": "d246f48d-3651-4bac-a018-e355d88b6910",
+				"method": "PATCH"
+			},
+			{
+				"id": "ed3f6842-63d3-46a2-8608-ca432d4a2ac0",
+				"method": "DELETE"
+			},
+			{
+				"id": "4dbfce36-79e8-4e71-bceb-c49ff444a78f",
+				"method": "DELETE"
+			},
+			{
+				"id": "37640271-bbcb-4b1a-a2e9-3a57f42eff54",
+				"method": "GET"
+			},
+			{
+				"id": "3111a86e-d647-4df9-bf23-6d54ace4dd83",
+				"method": "GET"
+			},
+			{
+				"id": "07aae053-f65a-4c4f-996f-d6ade26044ad",
+				"method": "POST"
+			},
+			{
+				"id": "48dffc26-7727-45d4-8a33-8b99bd2f918a",
+				"method": "POST"
+			},
+			{
+				"id": "cbdd7d6a-5b74-4a70-b8a1-05f2ee3951a9",
+				"method": "PATCH"
+			},
+			{
+				"id": "0a402f9a-3bf6-4371-8673-e2992497895c",
+				"method": "PATCH"
+			},
+			{
+				"id": "0827d8e9-6548-4668-aefc-f20ffbcc7e3a",
+				"method": "DELETE"
+			},
+			{
+				"id": "a73fc328-638b-4a52-ad54-a0a81a5b938b",
+				"method": "DELETE"
+			}
+		]
+	}
+}

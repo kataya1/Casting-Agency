@@ -1,0 +1,1220 @@
+{
+	"info": {
+		"_postman_id": "44476ea9-bf7c-4bf7-b79e-841ee0bf22ca",
+		"name": "Casting-Agency",
+		"description": "Capstone project casting agency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Not Registered",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "75efa317-8761-48c8-a931-e31e857d8383",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actor"
+					},
+					"response": []
+				}
+			],
+			"description": "not registered and try to use the api",
+			"auth": {
+				"type": "noauth"
+			},
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "No Role assigned",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb86b1ef-02df-43bc-bee1-216a0b818d5d",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actor"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRzMUNiZTR3TWdQRWV0dDk2RmdDUyJ9.eyJpc3MiOiJodHRwczovL25vaXN5LXBvbmQtMTg0OS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWY0MDI3MThmZTQ1MjcwMDZkOTNhNjk5IiwiYXVkIjoiY2FzdGluZy1hZ2VuY3kiLCJpYXQiOjE1OTgwMzk4MzIsImV4cCI6MTU5ODA0NzAzMiwiYXpwIjoiN05DR1laNnV0V0Z0WWJ1R1UyYlEzVTJIOGZiczNOcmIiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbXX0.UE6ubn3zr8lkTc0W8qy7HANWAAz6N1ZnH4DY6tnUfuqfL5xy8S06lnAvEthGhsObt-pOVDh4e0iI2aLm8qRKmEykD-KlsYjAL4o54UzZz10h7dG_r2ysTEZFi5C8kO-J0kZ5dJwGlxGxT6cvJNYnaxvp70ze7NClegcoVB4jvBVD2LtAZJbQzQUGFtn_M07ScG1KBWS2iVBxgXHMnuu4DgrAMN7LIDpNM0T8jeBD8S_8jchf8pzT2naIx0tQN0tSZAc5iVyPhnCcYWX2XooIbvJrB_uwkpC7SK8EH7T7k-XICs7vk1TWbpY1ot9hGhQsMHhk0DCFE2Z9g-60HaBeBw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "446e0346-76f0-4805-961d-433df8dc3f61",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "22404199-9b20-4c4c-b14d-582e50731d86",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Casting Assistant",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0878c6cc-dbf4-41cb-ac94-026495204424",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5c3a221d-ac23-49bf-8679-844fada3fb2e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "get movies"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dd7acc3b-b5bb-4126-882a-a1ef4034e2dc",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Schindler's List\",\r\n    \"release_date\": \"1993-11-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc8477ef-b736-498a-86ce-0849548957a8",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tom Cruise\",\r\n    \"DOB\": \"1962-7-3\",\r\n    \"gender\": \"male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b49071da-e9f5-4475-9f39-7ddff109b063",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rosavelt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d8819ebc-2ba6-41cb-9ffc-c900cee6b91d",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"empire strike back\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "05a5da58-7dad-446c-816c-39fa8b75ab20",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"2"
+							]
+						},
+						"description": "delete actors"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ebab6bcf-3bdd-47b6-891c-af4026b1a6f4",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Can view actors and movies",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRzMUNiZTR3TWdQRWV0dDk2RmdDUyJ9.eyJpc3MiOiJodHRwczovL25vaXN5LXBvbmQtMTg0OS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWY0MDIxNGM4ZjE4YWEwMDY4OWUwMmM5IiwiYXVkIjpbImNhc3RpbmctYWdlbmN5IiwiaHR0cHM6Ly9ub2lzeS1wb25kLTE4NDkudXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU5ODAzOTMyNywiZXhwIjoxNTk4MDQ2NTI3LCJhenAiOiI3TkNHWVo2dXRXRnRZYnVHVTJiUTNVMkg4ZmJzM05yYiIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyJdfQ.fRHOCkyNCpj0XbyjQ-58S_WlcYSXcq_68CvrmeV6q6O-hgzZZOzVffhMzRHIkVt3x-9bOzxHXNHHSYIBKHY0TjvDqLUTUgNAbw9OtZUTDo7OrSg3RI2SdLUsUNSya11h5hYkwYtgyWl-VMypecO3vmsgIHFLefhsrHf2pIkSQ3wf6ipLemeSAYYZcjPkWucWE6wFqkJW4oamY6yoeVkXYgFNf6iUOhre5LljNfhHaNek30BLt9Nh8e9LKyGizRu2NHEKjYwcqiCNkVymv8yW1bsPFTQAr1uCDj3bAAYeU9VS4e89VpxqhyPDWlRdRzie0e0T-2lIVlqLkl_yptGLLQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6cc0c5e9-3582-48e8-bc06-e8c5d1f49f72",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a1a4b0f-9f8c-4cff-b8a5-4fac7460d84a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Casting Director",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "36909a9b-502a-4cae-a532-c6025e0e380e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "85e103a7-4b73-4ba5-a18f-a5bceba3f155",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "get movies"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f638338a-7bf2-4f86-a845-dfe46a7514f0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"actor_id\", jsonData.actor.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tom Cruise\",\r\n    \"DOB\": \"1962-7-3\",\r\n    \"gender\": \"male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9de7a4e6-06a9-4591-93d5-36edfa7d0af8",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Schindler's List\",\r\n    \"release_date\": \"1993-11-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/{{actor_id}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84a08baa-85d6-4875-8879-4eeee5f67c3e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rosavelt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/{{actor_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"{{actor_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c40ce48-b7a5-45d1-8803-7b9131269f9d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rosavelt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/{{actor_id}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d7adf2b4-2640-4d6a-b4d0-383ce4d9f9f6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/{{actor_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"{{actor_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf2df226-9e50-4e2c-88c0-e50e6f8b5d96",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All permissions a Casting Assistant has and…\r\nAdd or delete an actor from the database\r\nModify actors or movies",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRzMUNiZTR3TWdQRWV0dDk2RmdDUyJ9.eyJpc3MiOiJodHRwczovL25vaXN5LXBvbmQtMTg0OS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWY0MDI3MThmZTQ1MjcwMDZkOTNhNjk5IiwiYXVkIjpbImNhc3RpbmctYWdlbmN5IiwiaHR0cHM6Ly9ub2lzeS1wb25kLTE4NDkudXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU5ODA0MDIyNywiZXhwIjoxNTk4MDQ3NDI3LCJhenAiOiI3TkNHWVo2dXRXRnRZYnVHVTJiUTNVMkg4ZmJzM05yYiIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyJdfQ.mqxi4PYXdlduUAZuHAP8WdTWrmjJxsj8NUxfIcR2yoEm-1nLjpF6u9P-3ADz-UBSRYaFsnM_0GN-GnFmPkB0KDYbV6wNyfQ_vNJNjRX0wo0rj7Yc2IbrcbItFfEXEbBz3qznogse33RXfT9Bosn1hifMUzmcL0od5ExeHgzjyCAFfn7yuCHKJsbx147JXM_1TeV7XReI8t4GQw0nzjhsdck4mUF1_jBvHus-9iprregJqeLhe_d7R4mHkbgDSQTrpuiS1QmXmNzXa739hG2homOEP4kCMjTLW6lu-ubZRXwljbLcxW_65RSwDKIPEOhq0HvXnOiq7esbrzPz8Sd5Cw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "91aed01e-f3c9-4d39-a65b-8514df7e5220",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1ffad1f-f82c-4b2b-b69c-562151e1260e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Executive Producer",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d68fe4d-95e4-432e-bf2f-73569f64a4f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e147ca61-cf38-4a36-aeaa-c25cd175714f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "get movies"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d02f8a6d-8ec3-4bce-a8e9-f2e49e69b250",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"actor_id\", jsonData.actor.id);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "89483370-f8d3-422b-9c63-272a4f26dae4",
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tom Cruise\",\r\n    \"DOB\": \"1962-7-3\",\r\n    \"gender\": \"male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4450dcc1-7e6b-47fb-940f-6e8a47c67537",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"movie_id\", jsonData.movie.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Schindler's List\",\r\n    \"release_date\": \"1993-11-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/{{actor_id}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "48d5ea96-30d3-4582-8526-dfefe8af0878",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rosavelt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/{{actor_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"{{actor_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/{{movie_id}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "47f3ce68-063e-4880-afba-069a92491bf8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rosavelt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/{{actor_id}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "af9a12fe-8825-4ea9-a80a-b6c4570cd3f3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "70a2eb0b-2f04-4d57-94c4-f1b1b25b60b5",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/{{actor_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"{{actor_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/{{movie_id}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34143a47-a6a2-4556-b3ae-4819088d9893",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "fada720e-a3b6-43c9-bf09-f081588f9690",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/{{movie_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"{{movie_id}}"
+							]
+						},
+						"description": "deletes movies"
+					},
+					"response": []
+				}
+			],
+			"description": "All permissions a Casting Director has and…\r\nAdd or delete a movie from the database\r\n",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRzMUNiZTR3TWdQRWV0dDk2RmdDUyJ9.eyJpc3MiOiJodHRwczovL25vaXN5LXBvbmQtMTg0OS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWYzZWFhNDM4ZjE4YWEwMDY4OWRlMjcwIiwiYXVkIjoiY2FzdGluZy1hZ2VuY3kiLCJpYXQiOjE1OTgwMzc4MjMsImV4cCI6MTU5ODA0NTAyMywiYXpwIjoiN05DR1laNnV0V0Z0WWJ1R1UyYlEzVTJIOGZiczNOcmIiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6bW92aWVzIl19.fzOjgzqNxJT-bZblFR_CevqctSOnUoeEDLiUYAMPZla9gRqTSeEYaRxOQkak6bBLEY5jgxbnK1rDng7iAuHZM4TmhtvXIdfxRystFguVFMg_O9t0uloRet91wTFhGuVjAlKRO7MisL1uKtU0gVjTIvYQ837uNx-3J8kfkSs8ohGeathnjCmOiyYqtiNKP_8il7fKg0B88R6UXL2q32Fw9OTiuaOcTDsYIlMm1Sqbp_8AD8JQl5CCLVsOix-CqL5umohHK-qyLlRTdg5nuumXJH2nDjcaitmcorRg6ONTKapvTPI_LYyZIAcp5OZIES6aP_0BTVZBykqfrRt4wFXM6g",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b430524f-d056-4e43-bf13-6670a8005515",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "fab87c5e-5487-455b-943e-8e9f4b249c87",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e0a21d3a-474e-4cba-9ad9-a867907cea2a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "da8da659-1bfd-415e-9894-8900150ec86b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "3235a9a0-9657-4f21-951f-d50a636a0fdc",
+			"key": "host",
+			"value": "https://casting-agency1996.herokuapp.com"
+		},
+		{
+			"id": "4e2ab54b-ef79-4362-a077-210892a12a53",
+			"key": "actor_id",
+			"value": ""
+		},
+		{
+			"id": "1161a620-ed7b-4621-ba0d-f23046b5cf96",
+			"key": "movie_id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
