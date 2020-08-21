@@ -3,11 +3,11 @@ from flask import Flask, request, abort, jsonify, render_template, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db, Actor, Movie
-# from auth import AuthError, requires_auth, AUTH0_AUTHORIZE_URL
+from auth import AuthError, requires_auth, AUTH0_AUTHORIZE_URL
 
 # pagination
 items_PER_PAGE = 5
-AUTH0_AUTHORIZE_URL = "https://noisy-pond-1849.us.auth0.com/authorize?audience=casting-agency&response_type=token&client_id=7NCGYZ6utWFtYbuGU2bQ3U2H8fbs3Nrb&redirect_uri=https://casting-agency1996.herokuapp.com/callback"
+# AUTH0_AUTHORIZE_URL = "https://noisy-pond-1849.us.auth0.com/authorize?audience=casting-agency&response_type=token&client_id=7NCGYZ6utWFtYbuGU2bQ3U2H8fbs3Nrb&redirect_uri=https://casting-agency1996.herokuapp.com/callback"
 
 
 def paginate_items(request, selection):
@@ -35,6 +35,7 @@ def create_app(test_config=None):
 
     @app.route("/callback")
     def callback_redirector():
+        
         return render_template("index.html")
 
     @app.route("/logout")
@@ -46,7 +47,7 @@ def create_app(test_config=None):
 #                API
 # ---------------------------------------
     @app.route('/actors')
-    # @requires_auth(permission='get:actors')
+    @requires_auth(test_config, permission='get:actors')
     def get_actors():
         actors = Actor.query.order_by(Actor.id).all()
         current_selection = paginate_items(request, actors)
@@ -59,7 +60,7 @@ def create_app(test_config=None):
         }), 200
 
     @app.route('/movies')
-    # @requires_auth(permission='get:movies')
+    @requires_auth(test_config, permission='get:movies')
     def get_movies():
         movies = Movie.query.order_by(Movie.id).all()
         current_selection = paginate_items(request, movies)
@@ -72,7 +73,7 @@ def create_app(test_config=None):
         }), 200
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    # @requires_auth(permission="delete:actors")
+    @requires_auth(test_config, permission="delete:actors")
     def delete_actor(id):
         actor = Actor.query.get_or_404(id)
         try:
@@ -81,12 +82,12 @@ def create_app(test_config=None):
                 "success": True,
                 "deleted actor id": id
             }), 200
-        except Exceptions as e:
+        except Exception as e:
             print(f"error: {e}")
             abort(422)
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    # @requires_auth(permission="delete:movies")
+    @requires_auth(test_config, permission="delete:movies")
     def delete_movie(id):
         movie = Movie.query.get_or_404(id)
         try:
@@ -95,12 +96,12 @@ def create_app(test_config=None):
                 "success": True,
                 "deleted movie id": id
             }), 200
-        except Exceptions as e:
+        except Exception as e:
             print(f"error: {e}")
             abort(422)
 
     @app.route('/actors', methods=['POST'])
-    # @requires_auth(permission="post:actors")
+    @requires_auth(test_config, permission="post:actors")
     def add_actors():
         try:
             body = request.get_json()
@@ -116,7 +117,7 @@ def create_app(test_config=None):
             abort(422)
 
     @app.route('/movies', methods=['POST'])
-    # @requires_auth(permission="post:movies")
+    @requires_auth(test_config, permission="post:movies")
     def add_movies():
         try:
             body = request.get_json()
@@ -132,7 +133,7 @@ def create_app(test_config=None):
             abort(422)
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
-    # @requires_auth(permission="patch:actors")
+    @requires_auth(test_config, permission="patch:actors")
     def update_actors(id):
         actor = Actor.query.get_or_404(id)
         try:
@@ -154,7 +155,7 @@ def create_app(test_config=None):
             abort(422)
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
-    # @requires_auth(permission="patch:movies")
+    @requires_auth(test_config, permission="patch:movies")
     def update_movies(id):
         movie = Movie.query.get_or_404(id)
         try:
@@ -211,15 +212,15 @@ def create_app(test_config=None):
         }), 500
 
     # source https://knowledge.udacity.com/questions/97965
-    # @app.errorhandler(AuthError)
-    # def autherror(error):
-    #     error_details = error.error
-    #     error_status_code = error.status_code
-    #     return jsonify({
-    #         'success': False,
-    #         'error': error_status_code,
-    #         'message': f"{error_details['code']}: {error_details['description']}"
-    #     }), error_status_code
+    @app.errorhandler(AuthError)
+    def autherror(error):
+        error_details = error.error
+        error_status_code = error.status_code
+        return jsonify({
+            'success': False,
+            'error': error_status_code,
+            'message': f"{error_details['code']}: {error_details['description']}"
+        }), error_status_code
 
     return app
 

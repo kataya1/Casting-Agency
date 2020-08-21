@@ -12,7 +12,7 @@ class CapstoneTestCase(unittest.TestCase):
 
     def setUp(self):
         """Define test variables and initialize app."""
-        self.app = create_app()
+        self.app = create_app('unittest')
         self.client = self.app.test_client
         setup_db(self.app)
         # binds the app to the current context

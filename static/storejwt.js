@@ -1,5 +1,5 @@
 // store
-let jwt = response.jwt
+let jwt = document.URL.split('&')[0].split('access_token=')
 localStorage.setItem("token", jwt)
 
 //  use jwt

@@ -11,7 +11,7 @@ ALGORITHMS = ['RS256']
 # API_AUDIENCE = 'casting-agency'
 AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
 API_AUDIENCE = os.environ['API_AUDIENCE']
-# AUTH0_AUTHORIZE_URL = f"https://{AUTH0_DOMAIN}/authorize?audience={API_AUDIENCE}&response_type=token&client_id={os.environ['AUTH0_CLIENT_ID']}&redirect_uri={os.environ['AUTH0_CALLBACK_URL']}"
+AUTH0_AUTHORIZE_URL = f"https://{AUTH0_DOMAIN}/authorize?audience={API_AUDIENCE}&response_type=token&client_id={os.environ['AUTH0_CLIENT_ID']}&redirect_uri={os.environ['AUTH0_CALLBACK_URL']}"
 
 
 # AuthError Exception
@@ -160,13 +160,16 @@ def verify_decode_jwt(token):
     }, 400)
 
 
-def requires_auth(permission=''):
+def requires_auth(test_config, permission=''):
     def requires_auth_decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            token = get_token_auth_header()
-            payload = verify_decode_jwt(token)
-            check_permissions(permission, payload)
+            if test_config == 'unittest':
+                pass
+            else:
+                token = get_token_auth_header()
+                payload = verify_decode_jwt(token)
+                check_permissions(permission, payload)
 
             return f(*args, **kwargs)
         return wrapper
