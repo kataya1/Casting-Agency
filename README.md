@@ -5,7 +5,8 @@ the motivation is to help  the casting company through easing the procedures to 
 ### hosting (APP URL)
 The app is  hosted at https://casting-agency1996.herokuapp.com/
 ### Authentication (`/authorize`)
-the base url will have a link for signing up (note: the roles and permission are added by the admin and there is no defaul role to new registers). here is the link for the login/signup page `https://noisy-pond-1849.us.auth0.com/authorize?audience=casting-agency&response_type=token&client_id=7NCGYZ6utWFtYbuGU2bQ3U2H8fbs3Nrb&redirect_uri=https://casting-agency1996.herokuapp.com/callback`
+the base url will have a link for signing up (note: the roles and permission are added by the admin and there is no defaul role to new registers). here is the link for the login/signup page 
+- https://noisy-pond-1849.us.auth0.com/authorize?audience=casting-agency&response_type=token&client_id=7NCGYZ6utWFtYbuGU2bQ3U2H8fbs3Nrb&redirect_uri=https://casting-agency1996.herokuapp.com/callback
 #### mock accounts:
  - Role: no role assigned: email: rachael97@qacmemphis.com pw: 3432stnrM
  - Role: Casting Assistant: email: michial7@gannoyingl.com  pw: rst23ST2232
@@ -61,7 +62,9 @@ Modify actors or movies
    - All permissions a Casting Director has and…
 Add or delete a movie from the database
 
-for more information check out [heroku auth0 addon](https://devcenter.heroku.com/articles/auth0) and [auth0 Documentation](https://auth0.com/docs/)
+for more information check out [heroku auth0 addon](https://devcenter.heroku.com/articles/auth0) and [auth0 Documentation](https://auth0.com/docs/).
+
+or you can use the mock emails in the already configured app
 
 &nbsp;
 ### Database Setup
@@ -77,21 +80,21 @@ $ source setup.sh
 ```
 and setup the models(tables)
 ```
-$ python manage.py db init
-$ python manage.py db migrate
-$ python manage.py db upgrade
+$ python3 manage.py db init
+$ python3 manage.py db migrate
+$ python3 manage.py db upgrade
 ```
 &nbsp;
 
 #### `or` 
-run this for a quick setup after setting up the database (you need the above to be able to modify models and migrate for local development)
+run this for a quick setup after setting up the database (you need the above steps to be able to modify models and migrate for local development)
 ```bash
 $ psql <database name>  < capstone.psql 
 ```
 
 &nbsp;
 
-(optional) From the  files in the misc folder provided you can make dummy database entry. 
+(optional) From the files in the misc folder provided you can make dummy database entries.(the server needs to be running first) 
 ```bash
 $ source misc/actornames.sh
 $ source misc/movienames.sh
@@ -99,22 +102,19 @@ $ source misc/movienames.sh
 
 ### Running the server
 \
-from withing the `root` directory first ensure you are working using your created virtual environment. first ensure that the environment varables are setup in the `setup.sh` change it as appropriate.
-To run the server, execute:
+from withing the `root` directory first ensure you are working using your created virtual environment. first ensure that the environment variables are setup in `setup.sh` change it as appropriate.
+To run the server execute:
 
 ```bash
 $ python3 app.py
 ```
 ## Testing
-- Unit-test: The test is in test_app.py file. There is a flag/parameter to the create_app function itself `create_app(test_config=None)`  so when unit testing  it sets `test_config` with value 'unittest' e.g. `create_app('unittest')`  and pass it as an argument to @requires_auth(test_config, permission='get:actors')  for a simple if statement in `auth.py` to test for token validity or not. this way we can respect the unit-test concept and do no proprietary cryptographic algorithm like generating a token in code and such, to test run:
+- Unit-test: The tests is in `test_app.py`. There is a flag/parameter to the create_app() function `create_app(test_config=None)`  so when unit testing  it sets `test_config` with value 'unittest' i.g. `create_app('unittest')`  and pass it as an argument to i.g. `@requires_auth(test_config, permission='get:actors')`  for a simple if statement in `auth.py` to test for token validity or not. This way we can respect the unit-test concept and do no proprietary cryptographic algorithm like generating a token in code and such, to test run:
 ```bash
 $ python3 test_app.py
 ```
-- RBAC(Role Based Acess Control) test: there is a postman collection for api testing in file: `Casting-Agency.postman_collection.json` you can import it into postman. it's  extensive and covers almost every thing
-- if you bass the value `'unittest'` in the create_app()function,it will bypass the permission checking process for testing purposes this is used in unittesting, e.g.
-```python
-app = create_app('unittest')
-```
+- RBAC(Role Based Acess Control) test: there is a postman collection for API testing in file: `Casting-Agency.postman_collection.json` you can import it into postman. it's  extensive and covers almost every thing
+
 
 
 ---
