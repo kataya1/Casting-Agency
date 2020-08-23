@@ -11,7 +11,10 @@ ALGORITHMS = ['RS256']
 # API_AUDIENCE = 'casting-agency'
 AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
 API_AUDIENCE = os.environ['API_AUDIENCE']
-AUTH0_AUTHORIZE_URL = f"https://{AUTH0_DOMAIN}/authorize?audience={API_AUDIENCE}&response_type=token&client_id={os.environ['AUTH0_CLIENT_ID']}&redirect_uri={os.environ['AUTH0_CALLBACK_URL']}"
+AUTH0_AUTHORIZE_URL = f"https://{AUTH0_DOMAIN}/authorize?\
+audience={API_AUDIENCE}\
+&response_type=token&client_id={os.environ['AUTH0_CLIENT_ID']}\
+&redirect_uri={os.environ['AUTH0_CALLBACK_URL']}"
 
 
 # AuthError Exception

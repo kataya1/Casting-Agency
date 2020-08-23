@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style type="text/css">
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Open Sans,Helvetica,sans-serif;
+            background: #03B3E4;
+            color: white;
+        }
+        a{
+            align-self: center;
+        }
+        a:visited{
+            color: aliceblue;
+        }
+        a:hover{
+            color: tomato;
+        }
+        a:link{
+            color: aquamarine;
+        }
+    </style>
 </head>
-welcome! please signin to proceede
-<a href="{{AUTH0_AUTHORIZE_URL}}">Login</a>
+<h3>welcome! please signin to proceede</h3>
+<h2><a href="{{AUTH0_AUTHORIZE_URL}}">Login</a></h2>
 <body>
     
 </body>

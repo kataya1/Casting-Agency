@@ -1,4 +1,20 @@
 # Casting Agency
+The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies
+## Motivation
+the motivation is to help  the casting company through easing the procedures to achieve it's goals
+### hosting (APP URL)
+The app is  hosted at https://casting-agency1996.herokuapp.com/
+### Authentication (`/authorize`)
+the base url will have a link for signing up (note: the roles and permission are added by the admin and there is no defaul role to new registers). here is the link for the login/signup page `https://noisy-pond-1849.us.auth0.com/authorize?audience=casting-agency&response_type=token&client_id=7NCGYZ6utWFtYbuGU2bQ3U2H8fbs3Nrb&redirect_uri=https://casting-agency1996.herokuapp.com/callback`
+#### mock accounts:
+ - Role: no role assigned: email: rachael97@qacmemphis.com pw: 3432stnrM
+ - Role: Casting Assistant: email: michial7@gannoyingl.com  pw: rst23ST2232
+ - Role: Casting Director: email: rosalbaa4@gannoyingl.com   pw: rosalbaa4@gannoyingl.com
+ - Role: Executive Producer: email: tess5@kweekendci.com    pw: 165svbX5
+
+use the bearer token  (access_token) in the callback url. For API calls for cURL commands check [API cURL](https://documenter.getpostman.com/view/11760714/T1LV94Nj?version=latest) or import the the postman-collection `Casting-Agency.postman_collection.json` in postman and update the tokens there
+### RBAC tokens 
+are in the postman collection  `Casting-Agency.postman_collection.json`
 
 ## Getting Started
 
@@ -14,10 +30,10 @@ We recommend working within a virtual environment whenever using Python for proj
 
 #### PIP Dependencies
 
-Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
+Once you have your virtual environment setup and running, install dependencies by naviging to the root directory and running:
 
 ```bash
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 This will install all of the required packages we selected within the `requirements.txt` file.
@@ -26,209 +42,97 @@ This will install all of the required packages we selected within the `requireme
 
 - [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
 
-- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in app.py and can reference models.py. 
+- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in `app.py` and can reference `models.py`.
+- [jose](https://pypi.org/project/python-jose/) The JavaScript Object Signing and Encryption (JOSE) technologies, used to handle JWT decrypton and verification in `auth.py`
 
-- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server. 
+&nbsp;
 
-## Database Setup
-With Postgres running, create a database and setup the models(tables).  in terminal run.
+## Local Development
+### Auth0 
+there needs to be an auth0 application and api to handle user data and to assign roles and provide tokens with the following roles and permissions
+Roles:
+- Casting Assistant
+  - Can view actors and movies
+- Casting Director
+  - All permissions a Casting Assistant has and 
+Add or delete an actor from the database
+Modify actors or movies
+- Executive Producer
+   - All permissions a Casting Director has and…
+Add or delete a movie from the database
+
+for more information check out [heroku auth0 addon](https://devcenter.heroku.com/articles/auth0) and [auth0 Documentation](https://auth0.com/docs/)
+
+&nbsp;
+### Database Setup
+
+With Postgres running, create a database.  in terminal run.
 ```bash
-createdb <database name>
-python manage.py db init
-python manage.py db migrate
-python manage.py db upgrade
+$ dropdb <database name>
+$ createdb <database name>
 ```
-From the  files in the misc folder provided you can make dummy database entry. 
+run to setup environment variables e.g.` DATABASE_URL`, you should change the DATABASE_URL with the new database name in setup.sh
 ```bash
-source misc/actornames.sh
-source misc/movienames.sh
+$ source setup.sh
+```
+and setup the models(tables)
+```
+$ python manage.py db init
+$ python manage.py db migrate
+$ python manage.py db upgrade
+```
+&nbsp;
+
+#### `or` 
+run this for a quick setup after setting up the database (you need the above to be able to modify models and migrate for local development)
+```bash
+$ psql <database name>  < capstone.psql 
 ```
 
-## Running the server
+&nbsp;
 
+(optional) From the  files in the misc folder provided you can make dummy database entry. 
+```bash
+$ source misc/actornames.sh
+$ source misc/movienames.sh
+```
+
+### Running the server
+\
 from withing the `root` directory first ensure you are working using your created virtual environment. first ensure that the environment varables are setup in the `setup.sh` change it as appropriate.
 To run the server, execute:
 
 ```bash
-source setup.sh
+$ python3 app.py
 ```
+## Testing
+- Unit-test: The test is in test_app.py file. There is a flag/parameter to the create_app function itself `create_app(test_config=None)`  so when unit testing  it sets `test_config` with value 'unittest' e.g. `create_app('unittest')`  and pass it as an argument to @requires_auth(test_config, permission='get:actors')  for a simple if statement in `auth.py` to test for token validity or not. this way we can respect the unit-test concept and do no proprietary cryptographic algorithm like generating a token in code and such, to test run:
+```bash
+$ python3 test_app.py
+```
+- RBAC(Role Based Acess Control) test: there is a postman collection for api testing in file: `Casting-Agency.postman_collection.json` you can import it into postman. it's  extensive and covers almost every thing
+- if you bass the value `'unittest'` in the create_app()function,it will bypass the permission checking process for testing purposes this is used in unittesting, e.g.
+```python
+app = create_app('unittest')
+```
+
+
 ---
 ## API reference
-### Getting Started
- - Base URL: runs Locally and is not hosted as a base URL. the backend app is hosted at http://0.0.0.0:8080 as a proxy in the frontend configurations 
- - Authentication: Doesn't require authentication or API keys
-### Error Handling
-errors are returned as a json objects in the following format:
-```JSON
-{
-    "success": False,
-    "error": 404,
-    "message": "resource not found",
-}
-```
-the API will return four error types when requests fail:
- - 400: Bad Request
- - 404: Resource Not Found
- - 422: Not Processable
- - 500: Internal server Error 
- ### Endpoints
- - GET /actors
- - GET /movies
- - POST /actors
- - POST /movies
- - DELETE /actors/`<actor_id>`
- - DELETE /movies/`<movie_id>`
- - PATCH /actors/`<actor_id>`
- - PATCH /movies/`<movie_id>`
+API documentation is in it's own markdown file here
+[API Documentation](/API_Documentation.md)
 
-#### GET /actors
- - Fetches the actor page, 5 actors per page. if page in the url is ommited it gets the first page
- - Request Argument: None
- - Returns: a json object that has a list of 5 or less actor objects, and the success status
-```JSON
-{
-  "actors": [
-    {
-      "DOB": "Sat, 13 Nov 1971 00:00:00 GMT",
-      "gender": "female",
-      "id": 1,
-      "name": "Actor1"
-    }, 
-    .
-    .
-    .
-    {
-      "DOB": "Sat, 10 Jan 1959 00:00:00 GMT",
-      "gender": "other",
-      "id": 5,
-      "name": "Actor5"
-    }
-  ],
-  "success": true
-}
-```
-#### GET /movies
- - Fetches the movie page, 5 movies per page. if page in the url is ommited it gets the first page
- - Request Argument: None
- - Returns: a json object that has a list of 5 or less movie objects, and the success status
-```JSON
-{
-  "movies": [
-    {
-      "id": 1,
-      "release date": "Sun, 05 May 2019 00:00:00 GMT",
-      "title": "Jojo Rabit"
-    },
-    .
-    .
-    .
-    {
-      "id": 5,
-      "release date": "Tue, 02 May 1995 00:00:00 GMT",
-      "title": "movie5"
-    }
-  ],
-  "success": true
-}
-```
-#### POST /actors
-- Create a new actor 
-- Request Arguments: actor's name, actors date of birth, actor's gender
-```JSON
-{
-    "name": "Huda Sha'arawi",
-    "DOB": "1965-3-16",
-    "gender": "female"
-}
-```
-- Return: a json object with an actor object
-```JSON
-{
-  "actor": {
-    "DOB": "Tue, 16 Mar 1965 00:00:00 GMT",
-    "gender": "female",
-    "id": 131,
-    "name": "Huda Sha'arawi"
-  },
-  "success": true
-}
-```
-#### POST /movies
-- Create a new movie
-- Request Arguments: movie's title, movie's release_date
-```JSON
-{
-    "title": "Schindler's List",
-    "release_date": "1993-11-30"
-}
-```
-- Return: a json object with an movie object
-```JSON
-{
-  "movie": {
-    "id": 141,
-    "release date": "Tue, 30 Nov 1993 00:00:00 GMT",
-    "title": "Schindler's List"
-  },
-  "success": true
-}
-```
-#### DELETE /actors/`<actor_id>`
-- deletes an actor
-- Request argument: None
-- Returns:  a json object with success status, and deleted actor id
-```JSON
-{
-"success": true,
-"deleted actor id": <actor_id>
-}
-```
-#### DELETE /movies/`<movie_id>`
-- deletes a movie
-- Request argument: None
-- Returns: a json object with success status, and deleted movie id
-```JSON
-{
-"success": true,
-"deleted movie id": <movie_id>
-}
-```
-#### PATCH /actors/`<actor_id>`
-- update the values of actor's object attributes
-- Request argument: one or more new values for the attributes of the actor object to be modified
-```JSON
-{
-    "name": "Rosavelt"
-}
-```
-- Returns: the modified actor object and the success status
-```JSON
-{
-  "actor": {
-    "DOB": "Mon, 26 May 1902 00:00:00 GMT",
-    "gender": "female",
-    "id": 44,
-    "name": "Rosavelt"
-  },
-  "success": true
-}
-```
-#### PATCH /movies/`<movie_id>`
-- update the values of movie's object attributes
-- Request argument: one or more new values for the attributes of the movie object to be modified
-```JSON
-{
-    "title": "Appolo 13"
-}
-```
-- Returns: the modified movie object and the success status
-```JSON
-{
-  "movie": {
-    "id": 2,
-    "release date": "Sat, 27 May 1995 00:00:00 GMT",
-    "title": "Appolo 13"
-  },
-  "success": true
-}
-```
+---
+## Deployment
+you can deploy on heroku 
+for more info [heroku deployment](https://devcenter.heroku.com/articles/python-support)
+
+---
+## Authors
+I
+
+---
+
+## Acknowledgemenet
+stackoverflow, the knowledge hub 
+and the FSND slack community
